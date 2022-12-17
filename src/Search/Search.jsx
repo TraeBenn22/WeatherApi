@@ -1,12 +1,12 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, lazy} from "react";
 import {Button, TextField, Typography} from "@material-ui/core";
-import {Results} from "../Results/Results";
 import {useStyles} from './styles'
 import axios from "axios";
+import {Results} from "../Results/Results";
 export const Search = () => {
     const [city, setCity] = useState('');
-    const [data, setData] = useState([]);
     const [cityData, setCityData] = useState([]);
+    const [searchType, setSearchType] = useState('')
     const [type, setType] = useState('');
     const classes = useStyles();
     const handleChange = (event) => {
@@ -19,6 +19,7 @@ export const Search = () => {
         const condition = data.current.condition.text;
         const basicArray = [name, temp, condition];
         setCityData(basicArray);
+
     }
 
     const  weeklyData = (data) => {
@@ -35,6 +36,8 @@ export const Search = () => {
         })
     }
 
+
+
     const weeklyForecast = async () => {
         setType('Weekly');
         const response = await axios(`http://api.weatherapi.com/v1/forecast.json?key=371a085f9e6d4693905205107221312&q=${city}&days=7`)
@@ -44,13 +47,21 @@ export const Search = () => {
     const currentForecast = async () => {
         setType('Current');
         const response = await axios(`http://api.weatherapi.com/v1/current.json?key=371a085f9e6d4693905205107221312&q=${city}`)
-
         currentData(response.data)
     }
 
 
-    useEffect(() => {
-        },[])
+    /** //
+     * future function to be converted to if given time for stretch goals
+     */
+    // const getWeatherData = async (event) => {
+    //     setSearchType(event.target.id);
+    //     const response = await axios(`http://api.weatherapi.com/v1/${searchType}.json?key=371a085f9e6d4693905205107221312&q=${city}`)
+    //     searchType === 'current' ? currentData(response.data) : weeklyData(response.data);
+    // }
+
+
+
 
     return(
         <div >
@@ -60,15 +71,15 @@ export const Search = () => {
             <TextField id="City" label="City" variant="outlined" value={city} onChange={(e) => handleChange(e)}>
 
             </TextField>
-           <Button onClick={currentForecast}>
+           <Button id='current' onClick={currentForecast}>
                 Basic Weather Data
            </Button>
-            <Button onClick={weeklyForecast}>
+            <Button id='forecast' onClick={weeklyForecast}>
                 Weekly Forecast
             </Button>
-            <div className={cityData.length > 0 ? classes.results : classes.hidden}>
-                <Results currentData={cityData} type={type} />
-            </div>
+
+                <Results data={cityData} type={type}/>
+
 
 
         </div>

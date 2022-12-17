@@ -1,49 +1,35 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import {TextField, Typography, FormControl} from "@material-ui/core";
 import {useStyles} from './styles';
+import {Form} from "react-router-dom";
 
 export const Results = (props) => {
-    const [data, setData] = useState(props.data ? props.data : [0]);
-    const [type, setType] = useState(props.type ? props.type : 'Current');
-
-
-
-
-    useEffect(()=> {
-
-    },[]);
+    const classes = useStyles();
     return(
-        <div>
-            {type === 'Current' ? data.map((item, index) => {
+        <div >
+            {props.type === 'Current' ? props.data.map((item, index) => {
                 return (
-                    <FormControl>
-                        <h1 key={index}>{item}</h1>
-                    </FormControl>
+                    <div key={index}>
+                        {item}
+                    </div>
                 )
-            }) : data.map((item, index) => {
-                return (
-                    <FormControl key={index}>
-                        <h1 >{item.date}</h1>
-                        <Typography id-="temp">
-                            {item.temp}
+            }) : props.data.map((item, index) => {
+                return(
+                    <FormControl className={classes.main} key={index}>
+                        <h1>{item.name}</h1>
+                        <Typography className={classes.tempBox}>
+                            <p>{item.temp}</p>
+                            <p>{item.tempHigh}</p>
+                            <p>{item.tempLow}</p>
                         </Typography>
-                        <Typography id="tempHigh">
-                            {item.tempHigh}
-                        </Typography>
-                        <Typography id="tempLow">
-                            {item.tempLow}
-                        </Typography>
-                        <Typography id="humidity">
-                            {item.humid}
-                        </Typography>
-                        <Typography id="condition">
-                            {item.cond}
-                        </Typography>
+
+                        <p>{item.humid}</p>
+                        <p>{item.cond}</p>
+
                     </FormControl>
-
-
                 )
             })}
         </div>
+
     )
 }

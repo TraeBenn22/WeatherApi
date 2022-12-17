@@ -19,7 +19,10 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-evenly',
     },
     header: {
-        paddingBottom: '50px',
+        width: '50%',
+        display: "flex",
+        paddingBottom: '15px',
+        paddingLeft: '25%',
 
     },
     headerText: {

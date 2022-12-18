@@ -54,20 +54,6 @@ export const Home = () => {
                 </Button>
             </FormControl>
 
-            <FormControl className={classes.infoBox}>
-                <Typography>
-                    {name}
-                </Typography>
-                <Typography>
-                    {data[0]}
-                </Typography>
-                <Typography>
-                    {data[1]}
-                </Typography>
-                <img src={data[2]} />
-
-            </FormControl>
-
 
         </div>
     )

@@ -4,14 +4,13 @@ export const useStyles = makeStyles((theme) => ({
         main: {
             display: 'flex',
             flexDirection: 'column',
-            backgroundColor: Colors.background,
         },
         button: {
             marginTop: '25px',
             marginBottom: '5px',
             height: '25px',
             background: Colors.background,
-            border: '2px solid black',
+            border: '2px solid #175cff',
         },
         buttonBox : {
           display: 'flex',

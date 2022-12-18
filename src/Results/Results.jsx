@@ -1,5 +1,5 @@
 import {useState, useEffect, useCallback} from 'react';
-import {TextField, Typography, FormControl, Button, Box, Modal} from "@material-ui/core";
+import {Grid, Typography, FormControl, Button, Box, Modal, CardContent, Card} from "@material-ui/core";
 import {useStyles} from './styles';
 import DatePicker from "react-datepicker";
 const Results = (props) => {
@@ -25,43 +25,47 @@ const Results = (props) => {
 
     }
     return(
-        <div>
+        <div >
             <h1 className={classes.title}>{props.city}</h1>
+            <FormControl className={classes.card} >
             {props.type === 'Current' ? props.data.map((item, index) => {
                 return (
-                    <div key={index}>
-                        <FormControl>
-                            <Typography>
-                                {props.city}
-                            </Typography>
-                            <Typography>
-                                {item.temp}
-                            </Typography>
-                            <Typography>
-                                {item.condition}
-                            </Typography>
-                            <img src={item.icon}>
-
-                            </img>
-                        </FormControl>
-                    </div>
+                    <Card  key={index}>
+                        <CardContent className={classes.cardContent}>
+                            <FormControl>
+                                <Typography>
+                                    {props.city}
+                                </Typography>
+                                <Typography>
+                                    {item.temp}
+                                </Typography>
+                                <Typography>
+                                    {item.condition}
+                                </Typography>
+                                <img src={item.icon}>
+                                </img>
+                            </FormControl>
+                        </CardContent>
+                    </Card>
                 )
             }) : props.data.map((item, index) => {
                 return(
-                    <FormControl className={classes.main} key={index}>
-                        <h1 className={classes.title}>{item.date}</h1>
-                        <FormControl className={classes.infoBox}>
-                            <Typography>Average Tempature {item.temp}F</Typography>
-                            <Typography>High {item.tempHigh}F</Typography>
-                            <Typography>Low {item.tempLow}F</Typography>
-                            <Typography>Humidity {item.humid}%</Typography>
-                            <Typography className={classes.condition}>{item.cond}
-                                <img src={item.condIcon} alt={item.condIcon}></img>
-                            </Typography>
-                        </FormControl>
-                    </FormControl>
+                    <Card  key={index}>
+                        <CardContent className={classes.cardContent}>
+                                <h1 className={classes.title}>{item.date}</h1>
+                                    <Typography className={classes.temp}>Average Tempature {item.temp}F</Typography>
+                                    <Typography className={classes.temp}>High {item.tempHigh}F</Typography>
+                                    <Typography className={classes.temp}>Low {item.tempLow}F</Typography>
+                                    <Typography className={classes.temp}>Humidity {item.humid}%</Typography>
+                                    <Typography className={classes.condition}>{item.cond}
+                                        <img src={item.condIcon} alt={item.condIcon}></img>
+                                    </Typography>
+                        </CardContent>
+                    </Card>
+
                 )
             })}
+            </FormControl>
             <Button id='save' className={classes.button} onClick={saveToProfile}>
                 Save this location to your Profile?
             </Button>
@@ -70,6 +74,7 @@ const Results = (props) => {
                     Looks like you already have that city saved!
                 </Box>
             </Modal>
+
         </div>
 
     )

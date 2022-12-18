@@ -4,7 +4,6 @@ export const useStyles = makeStyles((theme) => ({
     main: {
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: Colors.background,
     },
     button: {
         marginTop: '25px',
@@ -22,6 +21,9 @@ export const useStyles = makeStyles((theme) => ({
         paddingBottom: '50px',
 
     },
+    color: {
+      borderColor: 'blue',
+    },
     headerText: {
 
         fontSize: '50PX',
@@ -31,6 +33,8 @@ export const useStyles = makeStyles((theme) => ({
 
     },
     text: {
+
+        border: 'white',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',

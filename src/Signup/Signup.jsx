@@ -3,7 +3,7 @@ import {Button, TextField, Typography} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import {useStyles} from './styles';
 import {useNavigate} from "react-router";
-import {FormControl} from "@mui/material";
+import {FormControl} from "@mui/material"
 
 export const SignUp = () => {
     const [userName, setUserName] = useState('');
@@ -15,6 +15,8 @@ export const SignUp = () => {
     const handleChange = (event) => {
         event.target.id === 'name' ? setUserName(event.target.value) : setPassword(event.target.value);
     }
+
+
 
     const handleSignUp = () => {
         if(userName.length > 3) {
@@ -33,19 +35,22 @@ export const SignUp = () => {
     }
 
     return(
-        <div>
+        <div className={classes.main}>
             <FormControl className={classes.header} >
-                <Typography>
+                <Typography className={classes.headerText}>
                     Sign Up
                 </Typography>
             </FormControl>
-            <TextField id='name' className={classes.main} placeholder={'UserName'} onChange={(e) => handleChange(e)} >
+            <TextField   id='name' className={classes.text} label="username" value={userName} variant="outlined" placeholder={'UserName'} onChange={(e) => handleChange(e)} >
             </TextField>
-            <TextField id='password' className={classes.main} placeholder={'Password'} onChange={(e) => handleChange(e)} >
+            <TextField id='password' className={classes.text} label="password" value={password} variant="outlined" placeholder={'Password'} onChange={(e) => handleChange(e)} >
             </TextField>
-            <Button id='Signup' onClick={handleSignUp}>
-                Sign up!
-            </Button>
+            <div className={classes.buttonBox}>
+                <Button id='Signup'  className={classes.button} onClick={handleSignUp}>
+                    Sign up!
+                </Button>
+            </div>
+
         </div>
     )
 }

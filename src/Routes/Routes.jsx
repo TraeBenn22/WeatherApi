@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {Login} from "../Login/Login"
 import {Home} from "../Home/Home";
 import {SignUp} from "../Signup/Signup.jsx";
-import {Results} from "../Results/Results";
+import Results from "../Results/Results";
 import {Profile} from "../Profile/Profile";
 import {ErrorPage} from '../ErrorPage';
 import {Search} from "../Search/Search";

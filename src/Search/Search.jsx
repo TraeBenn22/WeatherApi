@@ -1,25 +1,38 @@
-import {useState, useEffect, lazy} from "react";
-import {Button, FormControl, TextField, Typography} from "@material-ui/core";
+import {useState, useEffect, lazy, Suspense} from "react";
+import {Button, FormControl, Modal, Box, TextField, Typography} from "@material-ui/core";
 import {useStyles} from './styles'
 import axios from "axios";
-import {Results} from "../Results/Results";
+import DatePicker from "react-datepicker";
 export const Search = () => {
     const [city, setCity] = useState('');
     const [cityData, setCityData] = useState([]);
-    const [searchType, setSearchType] = useState('')
+    const [searchType, setSearchType] = useState('');
+    const [historyModal, setHistoryModal] =useState(false);
     const [type, setType] = useState('');
+    const [date, setDate] = useState(new Date());
     const classes = useStyles();
     const handleChange = (event) => {
         setCity(event.target.value);
     }
+    const Results = lazy(() => import('../Results/Results'));
 
+    /**
+     * function that formats the response data for the current single day in an array
+     * @param data response data from API
+     */
     const currentData = (data) => {
         const temp = data.current.temp_f;
         const condition = data.current.condition.text;
-        const basicArray = [temp, condition];
+        const icon = data.current.condition.icon;
+        const basicArray = [temp, condition, icon];
         setCityData(basicArray);
 
     }
+
+    /**
+     * function that formats the response data to an array that is updated in cityData
+     * @param data the response from the API
+     */
 
     const  weeklyData = (data) => {
         const weekArr = [];
@@ -35,16 +48,30 @@ export const Search = () => {
             setCityData(weekArr);
         })
     }
+    /**
+     * Function returns 400 bad request because this API call is not part of the free plan
+     * @returns {Promise<void>}
+     */
+    const historicalForecast = async () => {
+        setType('Historical');
+        const response = await axios(`http://api.weatherapi.com/v1/history.json?key=371a085f9e6d4693905205107221312&q=${city}&dt=${date}`)
+        currentData(response.data);
+    }
 
-
-
+    /**
+     * function that gets weekly foracast data from API to me managed with weeklyData
+     * @returns {Promise<void>}
+     */
     const weeklyForecast = async () => {
         setType('Weekly');
         const response = await axios(`http://api.weatherapi.com/v1/forecast.json?key=371a085f9e6d4693905205107221312&q=${city}&days=7`)
         weeklyData(response.data);
-        console.log(response.data);
     }
 
+    /**
+     * function returns data for current day to be managed by currentData
+     * @returns {Promise<void>}
+     */
     const currentForecast = async () => {
         setType('Current');
         const response = await axios(`http://api.weatherapi.com/v1/current.json?key=371a085f9e6d4693905205107221312&q=${city}`)
@@ -79,10 +106,19 @@ export const Search = () => {
                 <Button className={classes.button} id='forecast' onClick={weeklyForecast}>
                     Weekly Forecast
                 </Button>
+                <Button className={classes.button} id='historical' onClick={(e) => setHistoryModal(true)} >Access Weather History</Button>
             </FormControl>
+            <Modal open={historyModal} onClose={(e) => setHistoryModal(false)}>
+                <Box className={classes.modal}>
+                    Pick a date
+                    <Button className={classes.button} id='searchHistorical' onClick={historicalForecast}>Search Date</Button>
+                    <DatePicker  selected={date} onChange={(date) => setDate(date)}/>
+                </Box>
+            </Modal>
 
-
+            <Suspense fallback={<div>Loading....</div>}>
                 <Results data={cityData} type={type} city={city} />
+            </Suspense>
 
 
 

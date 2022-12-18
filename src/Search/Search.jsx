@@ -24,7 +24,7 @@ export const Search = () => {
         const temp = data.current.temp_f;
         const condition = data.current.condition.text;
         const icon = data.current.condition.icon;
-        const basicArray = [temp, condition, icon];
+        const basicArray = [{temp: temp, condition: condition, icon: icon}];
         setCityData(basicArray);
 
     }

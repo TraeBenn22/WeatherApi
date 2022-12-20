@@ -10,8 +10,8 @@ export const useStyles = makeStyles((theme) => ({
         marginTop: '25px',
         marginBottom: '5px',
         height: '25px',
-        background: Colors.background,
-        border: '2px solid black',
+        border: '1px solid black',
+
     },
     buttonBox : {
         display: 'flex',
@@ -19,14 +19,13 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-evenly',
     },
     header: {
-        width: '50%',
+
         display: "flex",
         paddingBottom: '15px',
-        paddingLeft: '25%',
+        justifyContent: 'space-evenly',
 
     },
     headerText: {
-
         fontSize: '50PX',
         textAlign: 'center',
     },
@@ -39,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
     text: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        textAlign: 'center',
         maxWidth: '50%',
         paddingTop: '10px',
         marginLeft: '25%',
@@ -50,15 +49,31 @@ export const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
     },
     modal: {
+        display: 'flex',
+        width: '25%',
+        height: '25%',
+        flexDirection: 'column',
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
         border: '2px solid #000',
-        boxShadow: 24,
-        p: 4,
+    },
+    modalButton: {
+        width: '50%',
+        marginTop: '25px',
+        marginBottom: '5px',
+        height: '25px',
+        background: Colors.background,
+        border: '2px solid black',
+    },
+    modalBottom: {
+        alignItems: 'center',
+    },
+    modalText: {
+        color: 'blue',
     },
     datePicker: {
+        marginLeft: '30%',
     }
 }))

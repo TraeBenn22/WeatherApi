@@ -18,6 +18,7 @@ export const useStyles = makeStyles(() => ({
   hidden: FixedStyles.hidden,
   underline: FixedStyles.underline,
   largeText: FixedStyles.largeText,
+  title: FixedStyles.title,
   cardContainerHome: {
     margin: '10px',
     minHeight: '50%',

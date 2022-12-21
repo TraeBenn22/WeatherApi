@@ -63,7 +63,7 @@ export function Home() {
               {savedCityData.map((item, index) => (
                 <Card className={classes.cardContainerHome} key={index}>
                   <CardContent>
-                    <Typography className={classes.currentDate}>
+                    <Typography className={classes.title}>
                       {item.name}
                     </Typography>
                         <Box className={classes.conditionBox}>

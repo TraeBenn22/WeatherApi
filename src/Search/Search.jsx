@@ -29,7 +29,7 @@ export function Search() {
     setUserCity(event.target.value);
   };
 
-  /**
+  /**1
      * function that formats the weekly forecast data from the API call
      * @param data response data returned from the API call
      */

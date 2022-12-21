@@ -17,7 +17,7 @@ npm install
 ```
 4. Enter your API in a`.env` in the root of the project
 ```shell
-REACT_APP_API_KEY = 'ENTER YOUR API';
+REACT_APP_API_KEY = ENTER YOUR API
 ```
 5. start the project in the terminal
 ```shell

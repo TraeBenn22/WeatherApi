@@ -1,49 +1,14 @@
-import { makeStyles} from '@material-ui/styles';
-import { Colors } from '../Reusables/Colors';
-export const useStyles = makeStyles((theme) => ({
-        main: {
-            display: 'flex',
-            flexDirection: 'column',
-        },
-        button: {
-            marginTop: '25px',
-            marginBottom: '5px',
-            height: '25px',
-            background: Colors.background,
-            border: '2px solid #175cff',
-        },
-        buttonBox : {
-          display: 'flex',
-          flexDirection: 'row',
-            justifyContent: 'space-evenly',
-        },
-    header: {
-        paddingBottom: '50px',
+import { makeStyles } from '@material-ui/styles';
+import { FixedStyles } from '../Reusables/FixedStyles';
 
-    },
-    headerText: {
-
-            fontSize: '50PX',
-            textAlign: 'center',
-    },
-    textFields: {
-
-    },
-    text: {
-        display: 'flex',
-        flexDirection: 'column',
-       justifyContent: 'center',
-        maxWidth: '50%',
-      paddingTop: '10px',
-        marginLeft: '25%',
-    },
-    bottomText: {
-            fontSize: '20px',
-        paddingTop: '25%',
-        textAlign: 'center',
-    }
-
-
-
-}))
-
+export const useStyles = makeStyles(() => ({
+  main: FixedStyles.main,
+  button: FixedStyles.button,
+  buttonBox: FixedStyles.buttonBox,
+  header: FixedStyles.header,
+  headerText: FixedStyles.headerText,
+  alertBox: FixedStyles.alertBox,
+  hidden: FixedStyles.hidden,
+  bottomText: FixedStyles.bottomText,
+  text: FixedStyles.textField
+}));

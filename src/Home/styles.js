@@ -1,39 +1,34 @@
-import { makeStyles} from '@material-ui/styles';
-import { Colors } from '../Reusables/Colors';
-export const useStyles = makeStyles((theme) => ({
-    main: {
-        display: 'flex',
-        flexDirection: 'column',
-        backgroundColor: Colors.background,
-    },
-    button: {
-        marginTop: '25px',
-        marginBottom: '5px',
-        height: '25px',
-        background: Colors.background,
-        border: '2px solid black',
-    },
-    buttonBox : {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-    },
-    header: {
-        display: 'flex',
-        paddingBottom: '50px',
-    },
-    headerText: {
-        fontSize: '50PX',
-        textAlign: 'center',
-    },
-    infoBox: {
-        display: "flex",
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingTop: '50px',
-    },
+import { makeStyles } from '@material-ui/styles';
+import { FixedStyles } from '../Reusables/FixedStyles';
 
+export const useStyles = makeStyles(() => ({
+  main: FixedStyles.main,
+  button: FixedStyles.button,
+  scrollBox: FixedStyles.scrollBox,
+  dataBox: FixedStyles.dataBox,
+  buttonBox: FixedStyles.buttonBox,
+  conditionBox: FixedStyles.conditionBox,
+  conditionText: FixedStyles.conditionText,
+  headerText: FixedStyles.headerText,
+  tempText: FixedStyles.tempText,
+  centerText: FixedStyles.centerText,
+  header: FixedStyles.header,
+  currentDate: FixedStyles.currentDate,
+  img: FixedStyles.img,
+  hidden: FixedStyles.hidden,
+  underline: FixedStyles.underline,
+  largeText: FixedStyles.largeText,
+  cardContainerHome: {
+    margin: '10px',
+    minHeight: '50%',
+    minWidth: '50%',
+    boxShadow: '0 4px  0 #3f51b5',
+  },
 
-
-
-}))
+  infoBox: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: '50px',
+  },
+}));

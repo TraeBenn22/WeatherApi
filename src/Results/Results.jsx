@@ -1,82 +1,129 @@
-import {useState, useEffect, useCallback} from 'react';
-import {Grid, Typography, FormControl, Button, Box, Modal, CardContent, Card} from "@material-ui/core";
-import {useStyles} from './styles';
-import DatePicker from "react-datepicker";
-const Results = (props) => {
-    const classes = useStyles();
-    const [currentUserData, setCurrentUserData] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : []);
-    const [savingErrorModal , setSavingErrorModal] = useState(false);
-    const saveToProfile = () => {
-                const currentUser = currentUserData;
-                const nameSet = new Set();
-                for(let i = 0; i < currentUser.length; i++) {
-                    nameSet.add(currentUserData[i]);
-                }
-                if(nameSet.has(props.city)) {
-                    setSavingErrorModal(true);
-                } else {
-                    currentUser.push(props.city);
-                    console.log(currentUserData);
-                    setCurrentUserData(currentUser);
-                    localStorage.setItem('user', JSON.stringify(currentUserData));
-                }
+import {
+  Typography, CardContent, Card, FormControl, Box,
+} from '@material-ui/core';
+import { ScrollMenu } from 'react-horizontal-scrolling-menu';
+import NorthIcon from '@mui/icons-material/North';
+import SouthIcon from '@mui/icons-material/South';
+import OpacityIcon from '@mui/icons-material/Opacity';
+import { useStyles } from './styles';
 
+export function Results(props) {
+  const classes = useStyles();
+  const { forecastData, city, hours } = props;
+  return (
+    <div className={hours.length > 0 ? classes.main : classes.hidden}>
+      <h1 className={classes.title}>{city}</h1>
+      <Typography className={classes.underline}>Currently</Typography>
+        <Box className={classes.scrollBox}>
+      <Card className={classes.cardContainerResults}>
+        <CardContent>
+          <FormControl className={classes.conditionBox}>
+              <img className={classes.img} src={forecastData[0].condIcon} alt={forecastData[0].condition} />
+              <Typography className={classes.tempText}>
+              {forecastData[0].temp}F°
+            </Typography>
 
+          </FormControl>
+            <Box className={classes.dataBox}>
+            <Typography className={classes.centerText}>
+              <OpacityIcon />
+              {forecastData[0].humid}%
+            </Typography>
+            <Typography className={classes.centerText}>
+              <NorthIcon />
+              {forecastData[0].tempHigh}F°
+            </Typography>
+            <Typography className={classes.centerText}>
+              <SouthIcon />
+              {forecastData[0].tempLow}F°
+            </Typography>
+          </Box>
+        </CardContent>
+      </Card>
+        </Box>
+      <Typography className={classes.underline}>24 hour Forecast</Typography>
+        <Box className={classes.scrollBox}>
+      <ScrollMenu>
+        {hours.map((item, index) => (
+          <Card className={classes.cardContainer} key={index}>
+            <CardContent>
+              <Typography className={classes.centerText}>
+                {item.time}
+              </Typography>
 
-    }
-    return(
-        <div >
-            <h1 className={classes.title}>{props.city}</h1>
-            <FormControl className={classes.card} >
-            {props.type === 'Current' ? props.data.map((item, index) => {
-                return (
-                    <Card  key={index}>
-                        <CardContent className={classes.cardContent}>
-                            <FormControl>
-                                <Typography>
-                                    {props.city}
-                                </Typography>
-                                <Typography>
-                                    {item.temp}
-                                </Typography>
-                                <Typography>
-                                    {item.condition}
-                                </Typography>
-                                <img src={item.icon}>
-                                </img>
-                            </FormControl>
-                        </CardContent>
-                    </Card>
-                )
-            }) : props.data.map((item, index) => {
-                return(
-                    <Card  key={index}>
-                        <CardContent className={classes.cardContent}>
-                                <h1 className={classes.title}>{item.date}</h1>
-                                    <Typography className={classes.temp}>Average Tempature {item.temp}F</Typography>
-                                    <Typography className={classes.temp}>High {item.tempHigh}F</Typography>
-                                    <Typography className={classes.temp}>Low {item.tempLow}F</Typography>
-                                    <Typography className={classes.temp}>Humidity {item.humid}%</Typography>
-                                    <Typography className={classes.condition}>{item.cond}
-                                        <img src={item.condIcon} alt={item.condIcon}></img>
-                                    </Typography>
-                        </CardContent>
-                    </Card>
+              <img src={item.condIcon} alt={item.condition} />
+              <Typography className={classes.centerText}>
+                {item.temp}F°
+</Typography>
 
-                )
-            })}
-            </FormControl>
-            <Button id='save' className={classes.button} onClick={saveToProfile}>
-                Save this location to your Profile?
-            </Button>
-            <Modal open={savingErrorModal} onClose={(e) => setSavingErrorModal(false)}>
-                <Box className={classes.modal}>
-                    Looks like you already have that city saved!
+            </CardContent>
+          </Card>
+        ))}
+      </ScrollMenu>
+        </Box>
+      <Typography className={classes.underline}>Weekly Forecast</Typography>
+        <Box className={classes.scrollBox}>
+      <ScrollMenu>
+        {forecastData.map((item, index) => (
+          <Card className={classes.weeklyCard} key={index}>
+            <CardContent>
+              <Typography className={classes.currentDate}>
+                {item.date}
+              </Typography>
+                <Box className={classes.centerText}>
+                    <img className={classes.imgWeekly} src={item.condIcon} alt={item.condition} />
                 </Box>
-            </Modal>
+                <Typography className={classes.tempTextWeekly}>
+                {item.temp}F°
+</Typography>
+              <Typography className={classes.weeklyText}>
+                <OpacityIcon />
+                {item.humid}%
+</Typography>
+              <Typography className={classes.weeklyText}>
+                <NorthIcon />
+                {item.tempHigh}F°
+</Typography>
+              <Typography className={classes.weeklyText}>
+                <SouthIcon />
+                {item.tempLow}F°
+</Typography>
+            </CardContent>
+          </Card>
+        ))}
+        {forecastData.map((item, index) => (
+          <Card className={classes.payWallWeeklyCard} key={index}>
+            <CardContent>
+              <Typography className={classes.currentDate}>
+                {item.date}
+              </Typography>
 
-        </div>
+                <Box className={classes.centerText}>
+                    <img className={classes.imgWeekly} src={item.condIcon} alt={item.condition} />
+                </Box>
+                <Typography className={classes.tempTextWeekly}>
+                    {item.temp} F°
+                </Typography>
 
-    )
+
+              <Typography className={classes.weeklyText}>
+                <OpacityIcon />
+                  {item.humid}%
+                </Typography>
+              <Typography className={classes.weeklyText}>
+                <NorthIcon />
+                  {item.tempHigh}F°
+              </Typography>
+              <Typography className={classes.weeklyText}>
+                <SouthIcon />
+                {item.tempLow}F°
+              </Typography>
+            </CardContent>
+          </Card>
+        ))}
+      </ScrollMenu>
+        </Box>
+    </div>
+
+  );
 }
-export default Results;

@@ -4,7 +4,6 @@ import {
 } from '@material-ui/core';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
-import {API_KEY} from "../config";
 import SearchIcon from '@mui/icons-material/Search';
 import DatePicker from 'react-datepicker';
 import Alert from '@mui/material/Alert';
@@ -25,9 +24,11 @@ export function Search() {
   const [hours, setHours] = useState([]);
   const navigate = useNavigate();
   const classes = useStyles();
+  const API_KEY = process.env.REACT_APP_API_KEY;
   const handleChange = (event) => {
     setUserCity(event.target.value);
   };
+
   /**
      * function that formats the weekly forecast data from the API call
      * @param data response data returned from the API call

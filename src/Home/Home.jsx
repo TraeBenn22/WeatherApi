@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from 'react';
 import {
   Button, Typography, CardContent, Box, Card, FormControl,
 } from '@material-ui/core';
-import {API_KEY} from "../config";
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import OpacityIcon from '@mui/icons-material/Opacity';
@@ -16,7 +15,7 @@ export function Home() {
   const [guestStatus, setGuestStatus] = useState(JSON.parse(localStorage.getItem('guestStatus')));
   const classes = useStyles();
   const navigate = useNavigate();
-
+  const API_KEY = process.env.REACT_APP_API_KEY;
   const getCityForecasts = useCallback(() => {
     if (!guestStatus) {
       currentForecasts();
@@ -57,7 +56,7 @@ export function Home() {
         </Button>
       </FormControl>
       <Typography className={classes.underline}>Saved Locations</Typography>
-      {userData.savedCities.length > 0 && !guestStatus
+      {savedCityData.length > 0 && !guestStatus
         ? (
 
         <Box className={classes.scrollBox}>

@@ -15,7 +15,12 @@ git clone https://github.com/TraeBenn22/WeatherApp.git
 ```shell
 npm install
 ```
-4. Enter your API in `src/config.js`
+4. Enter your API in a`.env` in the root of the project
 ```shell
-export const API_KEY = 'ENTER YOUR API';
+REACT_APP_API_KEY = 'ENTER YOUR API';
 ```
+5. start the project in the terminal
+```shell
+npm run start
+```
+

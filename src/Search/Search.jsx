@@ -4,6 +4,7 @@ import {
 } from '@material-ui/core';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import {API_KEY} from "../config";
 import SearchIcon from '@mui/icons-material/Search';
 import DatePicker from 'react-datepicker';
 import Alert from '@mui/material/Alert';
@@ -27,7 +28,6 @@ export function Search() {
   const handleChange = (event) => {
     setUserCity(event.target.value);
   };
-
   /**
      * function that formats the weekly forecast data from the API call
      * @param data response data returned from the API call
@@ -47,7 +47,6 @@ export function Search() {
         date, temp: avgTemp, tempHigh: high, tempLow: low, humid: avgHumid, cond: condition, condIcon: icon,
       });
       setForecastData(weekArr);
-      console.log(currentUserData, 'currentuserData');
     });
   };
   /**
@@ -75,7 +74,7 @@ export function Search() {
      */
   const historicalForecast = async () => {
     setSubscribeText(true);
-    const response = await axios(`http://api.weatherapi.com/v1/history.json?key=371a085f9e6d4693905205107221312&q=${userCity}&dt=${date}`);
+    const response = await axios(`http://api.weatherapi.com/v1/history.json?key=${API_KEY}&q=${userCity}&dt=${date}`);
   };
 
   /**
@@ -83,7 +82,7 @@ export function Search() {
      * @returns {Promise<void>}
      */
   const getData = async () => {
-    const response = await axios(`http://api.weatherapi.com/v1/forecast.json?key=371a085f9e6d4693905205107221312&q=${userCity}&days=7`);
+    const response = await axios(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${userCity}&days=7`);
     weeklyData(response.data);
     getHours(response.data);
   };
@@ -103,7 +102,6 @@ export function Search() {
       currentSavedCities.push(userCity);
       localStorage.setItem('userData', JSON.stringify({ username: currentUserData.username, password: currentUserData.password, savedCities: currentSavedCities }));
     }
-    console.log(currentUserData);
   };
   /**
      * enables user to search location by pressing enter key

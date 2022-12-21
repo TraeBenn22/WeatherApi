@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import {
   Button, Typography, CardContent, Box, Card, FormControl,
 } from '@material-ui/core';
+import {API_KEY} from "../config";
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import OpacityIcon from '@mui/icons-material/Opacity';
@@ -26,7 +27,7 @@ export function Home() {
     const userCities = [];
     const savedUserCities = userData.savedCities;
     for (let i = 0; i < savedUserCities.length; i++) {
-      const response = await axios(`http://api.weatherapi.com/v1/forecast.json?key=371a085f9e6d4693905205107221312&q=${savedUserCities[i]}`);
+      const response = await axios(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${savedUserCities[i]}`);
       userCities.push({
         name: userData.savedCities[i],
         temp: response.data.current.temp_f,

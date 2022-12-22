@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
-  Button, Typography, CardContent, Box, Card, FormControl,
+  Button, Typography, CardContent, Box, Modal, Card, FormControl,
 } from '@material-ui/core';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
@@ -13,6 +13,7 @@ export function Home() {
   const userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : {};
   const [savedCityData, setSavedCityData] = useState([]);
   const [guestStatus, setGuestStatus] = useState(JSON.parse(localStorage.getItem('guestStatus')));
+  const [logoutModal, setLogoutModal] = useState(false);
   const classes = useStyles();
   const navigate = useNavigate();
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -40,17 +41,34 @@ export function Home() {
     setSavedCityData(userCities);
   };
 
+  const handleModalClick = () => {
+    setLogoutModal(false);
+    navigate('/');
+  }
+
+
+
   useEffect(() => {
     getCityForecasts();
   }, [getCityForecasts]);
 
   return (
-    <div>
+    <div >
       <FormControl className={classes.header}>
+        <Button className={classes.logoutButton} variant='contained' color='primary' onClick={(e) => guestStatus ? navigate('/') : setLogoutModal(true)}>{guestStatus ? 'Log In' : 'Log Out'}</Button>
         <Typography className={classes.headerText}>Home</Typography>
       </FormControl>
-
       <FormControl className={classes.buttonBox}>
+        <Modal open={logoutModal}>
+          <Box className={classes.modal}>
+            <Typography>
+              Are you sure you want to log out?
+            </Typography>
+            <Button className={classes.modalButton} id="logOut" onClick={handleModalClick}>
+              Log Out
+            </Button>
+          </Box>
+        </Modal>
         <Button className={classes.button} variant="contained" color="primary" onClick={() => navigate('/Search')}>
           Search
         </Button>

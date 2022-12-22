@@ -114,6 +114,11 @@ export function Search() {
     }
   };
 
+  const handleModalClick = () => {
+    setLogoutModal(false);
+    navigate('/');
+  }
+
   return (
     <div>
       <TextField

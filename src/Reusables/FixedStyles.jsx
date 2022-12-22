@@ -39,6 +39,13 @@ export const FixedStyles = {
       paddingTop: '10px',
       marginLeft: '25%',
     },
+  logoutButton: {
+      marginTop: '25px',
+      marginBottom: '5px',
+      height: '30px',
+      width: '15%',
+      border: '1px solid black',
+  },
   button: {
     marginTop: '25px',
     marginBottom: '5px',

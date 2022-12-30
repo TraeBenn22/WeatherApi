@@ -41,7 +41,7 @@ export function Results(props) {
         </CardContent>
       </Card>
         </Box>
-      <Typography className={classes.underline}>24 hour Forecast</Typography>
+      <Typography className={classes.underline}>24 Hour Forecast</Typography>
         <Box className={classes.scrollBox}>
       <ScrollMenu>
         {hours.map((item, index) => (

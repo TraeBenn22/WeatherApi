@@ -1,21 +1,35 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jest/globals": true
     },
     "extends": [
         "plugin:react/recommended",
+        "plugin:jest/recommended",
         "airbnb"
     ],
     "overrides": [
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
+        "ecmaFeatures": {
+            "jsx": true
+        },
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "jest"
     ],
     "rules": {
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "js": "always",
+                "jsx": "always"
+            }
+        ]
     }
 }

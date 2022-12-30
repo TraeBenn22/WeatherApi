@@ -55,7 +55,7 @@ export function Home() {
   return (
     <div >
       <FormControl className={classes.header}>
-        <Button className={classes.logoutButton} variant='contained' color='primary' onClick={(e) => guestStatus ? navigate('/') : setLogoutModal(true)}>{guestStatus ? 'Log In' : 'Log Out'}</Button>
+        <Button className={classes.logoutButton} label='log' variant='contained' color='primary' onClick={(e) => guestStatus ? navigate('/') : setLogoutModal(true)}>{guestStatus ? 'Log In' : 'Log Out'}</Button>
         <Typography className={classes.headerText}>Home</Typography>
       </FormControl>
       <FormControl className={classes.buttonBox}>
